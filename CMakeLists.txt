@@ -25,22 +25,22 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 
 find_package(OpenCV REQUIRED COMPONENTS core highgui imgproc features2d)
 
-if(MAKE_SCENE)
-	message(STATUS "Building ROVIO with openGL Scene Visualization")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DMAKE_SCENE=1")
-	find_package(GLEW REQUIRED)
-	include_directories(${GLEW_INCLUDE_DIRS})
+# if(MAKE_SCENE)
+# 	message(STATUS "Building ROVIO with openGL Scene Visualization")
+# 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DMAKE_SCENE=1")
+# 	find_package(GLEW REQUIRED)
+# 	include_directories(${GLEW_INCLUDE_DIRS})
 
-	find_package(GLUT REQUIRED)
-	include_directories(${GLUT_INCLUDE_DIRS})
-	link_directories(${GLUT_LIBRARY_DIRS})
-	add_definitions(${GLUT_DEFINITIONS})
+# 	find_package(GLUT REQUIRED)
+# 	include_directories(${GLUT_INCLUDE_DIRS})
+# 	link_directories(${GLUT_LIBRARY_DIRS})
+# 	add_definitions(${GLUT_DEFINITIONS})
 
-	find_package(OpenGL REQUIRED)
-	include_directories(${OpenGL_INCLUDE_DIRS})
-	link_directories(${OpenGL_LIBRARY_DIRS})
-	add_definitions(${OpenGL_DEFINITIONS})
-endif()
+# 	find_package(OpenGL REQUIRED)
+# 	include_directories(${OpenGL_INCLUDE_DIRS})
+# 	link_directories(${OpenGL_LIBRARY_DIRS})
+# 	add_definitions(${OpenGL_DEFINITIONS})
+# endif()
 
 find_package(PkgConfig)
 
@@ -102,11 +102,11 @@ catkin_package(
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${YamlCpp_INCLUDE_DIRS})
 
-if(MAKE_SCENE)
-	add_library(${PROJECT_NAME} src/Camera.cpp src/FeatureCoordinates.cpp src/FeatureDistance.cpp src/Scene.cpp)
-else()
-	add_library(${PROJECT_NAME} src/Camera.cpp src/FeatureCoordinates.cpp src/FeatureDistance.cpp)
-endif()
+# if(MAKE_SCENE)
+# 	add_library(${PROJECT_NAME} src/Camera.cpp src/FeatureCoordinates.cpp src/FeatureDistance.cpp src/Scene.cpp)
+# else()
+add_library(${PROJECT_NAME} src/Camera.cpp src/FeatureCoordinates.cpp src/FeatureDistance.cpp)
+# endif()
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${YamlCpp_LIBRARIES} ${OpenMP_EXE_LINKER_FLAGS} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${GLEW_LIBRARY} ${OpenCV_LIBRARIES})
 add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} rovio_generate_messages_cpp)
 

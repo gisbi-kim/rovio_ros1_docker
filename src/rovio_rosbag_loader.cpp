@@ -99,7 +99,10 @@ int main(int argc, char** argv){
 
   // Node
   rovio::RovioNode<mtFilter> rovioNode(nh, nh_private, mpFilter);
-  rovioNode.makeTest();
+  // rovioNode.makeTest();
+
+  std::cout << "makeTest off??" << std::endl;
+
   double resetTrigger = 0.0;
   nh_private.param("record_odometry", rovioNode.forceOdometryPublishing_, rovioNode.forceOdometryPublishing_);
   nh_private.param("record_pose_with_covariance_stamped", rovioNode.forcePoseWithCovariancePublishing_, rovioNode.forcePoseWithCovariancePublishing_);
